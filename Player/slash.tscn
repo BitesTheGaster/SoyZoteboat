@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://cuibpfxcxwioa"]
+
+[ext_resource type="Texture2D" uid="uid://bbaet4rqv3kbq" path="res://icon.svg" id="1_36otu"]
+[ext_resource type="Script" uid="uid://drs3ehq4sl5l6" path="res://Player/slash.gd" id="1_wndaw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_36otu"]
+size = Vector2(96, 96)
+
+[node name="Slash" type="Area2D"]
+script = ExtResource("1_wndaw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-16, 0)
+shape = SubResource("RectangleShape2D_36otu")
+
+[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
+z_index = -1
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_36otu")
+
+[node name="DeadTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+autostart = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="DeadTimer" to="." method="_on_dead_timer_timeout"]

@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://mhuwb6ow65fv"]
+
+[ext_resource type="Script" uid="uid://dl4vgh1li0kdc" path="res://Player/player.gd" id="1_4ntmi"]
+[ext_resource type="Texture2D" uid="uid://bbaet4rqv3kbq" path="res://icon.svg" id="1_l8h54"]
+[ext_resource type="PackedScene" uid="uid://bs5qrf2drwwte" path="res://UI/Hud/hud.tscn" id="2_vtle1"]
+[ext_resource type="Script" uid="uid://dxhrjk2cr86f" path="res://StateMachines/Player/PlayerStateMachine.gd" id="3_btcbx"]
+[ext_resource type="Script" uid="uid://dxegs8j4j88pu" path="res://StateMachines/Player/AirbornePlayerState.gd" id="4_fhl08"]
+[ext_resource type="Script" uid="uid://hc45ciqlslcx" path="res://StateMachines/Player/IdlePlayerState.gd" id="5_vtle1"]
+[ext_resource type="Script" uid="uid://00v86i5iyjrc" path="res://StateMachines/Player/MovePlayerState.gd" id="6_od3ui"]
+[ext_resource type="Script" uid="uid://bguayw2envskl" path="res://Controllers/PlayerController.gd" id="8_od3ui"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ntmi"]
+size = Vector2(64, 64)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_4ntmi")
+
+[node name="Hud" parent="." instance=ExtResource("2_vtle1")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4ntmi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 1, 0, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_l8h54")
+
+[node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("p")]
+script = ExtResource("8_od3ui")
+p = NodePath("..")
+metadata/_custom_type_script = "uid://bguayw2envskl"
+
+[node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("p", "init_state")]
+script = ExtResource("3_btcbx")
+p = NodePath("..")
+init_state = NodePath("IdlePlayerState")
+metadata/_custom_type_script = "uid://dxhrjk2cr86f"
+
+[node name="AirbornePlayerState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("p", "c", "state_machine")]
+script = ExtResource("4_fhl08")
+p = NodePath("../..")
+c = NodePath("../../PlayerController")
+state_machine = NodePath("..")
+metadata/_custom_type_script = "uid://dxegs8j4j88pu"
+
+[node name="IdlePlayerState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("p", "c", "state_machine")]
+script = ExtResource("5_vtle1")
+p = NodePath("../..")
+c = NodePath("../../PlayerController")
+state_machine = NodePath("..")
+metadata/_custom_type_script = "uid://hc45ciqlslcx"
+
+[node name="MovePlayerState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("p", "c", "state_machine")]
+script = ExtResource("6_od3ui")
+p = NodePath("../..")
+c = NodePath("../../PlayerController")
+state_machine = NodePath("..")
+metadata/_custom_type_script = "uid://00v86i5iyjrc"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="SlashCenter" type="Node2D" parent="."]
+
+[node name="SlashPos" type="Marker2D" parent="SlashCenter"]
+position = Vector2(64, 0)
+
+[node name="Preview" type="Sprite2D" parent="SlashCenter/SlashPos"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_l8h54")

@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://0n613sa6lspk"]
+
+[ext_resource type="Texture2D" uid="uid://bbaet4rqv3kbq" path="res://icon.svg" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://mhuwb6ow65fv" path="res://Player/player.tscn" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://dvyd5ef5hgi70" path="res://Player/camera_2d.gd" id="3_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://bs5qrf2drwwte" path="res://UI/Hud/hud.tscn" id="3_h2yge"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ig7tw"]
+size = Vector2(1280, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
+size = Vector2(128, 64)
+
+[node name="Main" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("2_0xm2m")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 128)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_ig7tw")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D/CollisionShape2D"]
+modulate = Color(0.3403393, 0.34033933, 0.3403393, 1)
+scale = Vector2(10, 1)
+texture = ExtResource("1_ig7tw")
+
+[node name="Area2D2" type="Area2D" parent="." groups=["spikes"]]
+position = Vector2(-300, -32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D2/CollisionShape2D"]
+modulate = Color(1, 0, 0, 1)
+scale = Vector2(1, 0.5)
+texture = ExtResource("1_ig7tw")
+
+[node name="Area2D" type="Area2D" parent="." groups=["spikes"]]
+position = Vector2(256, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D/CollisionShape2D"]
+modulate = Color(1, 0, 0, 1)
+scale = Vector2(1, 0.5)
+texture = ExtResource("1_ig7tw")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+editor_draw_drag_margin = true
+script = ExtResource("3_1bvp3")
+
+[node name="Hud" parent="Camera2D" instance=ExtResource("3_h2yge")]
+offset_left = -960.0
+offset_top = -540.0
+offset_right = -960.0
+offset_bottom = -540.0
+
+[node name="PogoShakeBuffer" type="Timer" parent="Camera2D"]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="Camera2D/PogoShakeBuffer" to="Camera2D" method="_on_pogo_shake_buffer_timeout"]
