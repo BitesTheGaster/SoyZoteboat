@@ -22,8 +22,8 @@ func _on_dead_timer_timeout() -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("spikes") and can_pogo:
-		p.pogo_velocity = -Vector2.from_angle(global_rotation) * 300
-		p.pogo_velocity.x *= 2
+		p.pogo_velocity = -Vector2.from_angle(global_rotation) * 350
+		p.pogo_velocity.x *= 1.5
 		p.pogo_velocity = p.pogo_velocity.round()
 		p.camera.pogo_velocity_buffer = p.pogo_velocity
 		can_pogo = false

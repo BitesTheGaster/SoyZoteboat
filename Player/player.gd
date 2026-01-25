@@ -9,7 +9,11 @@ class_name Player extends CharacterBody2D
 @onready var dash_length : Timer = $Timers/DashLength
 @onready var attack_delay : Timer = $Timers/AttackDelay
 @onready var inv_frames : Timer = $Timers/InvFrames
+@onready var dash_delay : Timer = $Timers/DashDelay
 @onready var collision : CollisionShape2D = $CollisionShape2D
+@onready var sprite : Sprite2D = $CollisionShape2D/Sprite2D
+@onready var dash_particles : CPUParticles2D = $CollisionShape2D/Sprite2D/DashParticles
+@onready var damage_particles : CPUParticles2D = $CollisionShape2D/Sprite2D/DamageParticles
 
 const G := Vector2(0, 980)
 const SPEED := 250.0
@@ -37,5 +41,6 @@ var is_invincible := false
 
 var raw_dir := Vector2.ZERO
 var move_dir := 0.0
+var last_dir := 1.0
 var pogo_velocity := Vector2.ZERO
 var current_speed := 0.0

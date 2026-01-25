@@ -27,7 +27,7 @@ scale = Vector2(10, 1)
 texture = ExtResource("1_ig7tw")
 
 [node name="Area2D2" type="Area2D" parent="." groups=["spikes"]]
-position = Vector2(-300, -32)
+position = Vector2(-300, -40)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
 shape = SubResource("RectangleShape2D_0xm2m")
