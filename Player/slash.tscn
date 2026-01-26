@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://cuibpfxcxwioa"]
+[gd_scene load_steps=5 format=3 uid="uid://cuibpfxcxwioa"]
 
 [ext_resource type="Texture2D" uid="uid://bbaet4rqv3kbq" path="res://icon.svg" id="1_36otu"]
 [ext_resource type="Script" uid="uid://drs3ehq4sl5l6" path="res://Player/slash.gd" id="1_wndaw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_36otu"]
 size = Vector2(96, 96)
+
+[sub_resource type="Gradient" id="Gradient_wndaw"]
+offsets = PackedFloat32Array(0, 0.7, 0.99333334)
+colors = PackedColorArray(18.892157, 18.892157, 18.892157, 1, 1, 1, 1, 0.52156866, 1, 1, 1, 0)
 
 [node name="Slash" type="Area2D"]
 script = ExtResource("1_wndaw")
@@ -23,5 +27,27 @@ wait_time = 0.3
 one_shot = true
 autostart = true
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(-202, 0)
+emitting = false
+amount = 16
+texture = ExtResource("1_36otu")
+lifetime = 2.0
+one_shot = true
+preprocess = 0.3
+explosiveness = 1.0
+lifetime_randomness = 0.3
+emission_shape = 1
+emission_sphere_radius = 32.0
+direction = Vector2(-1, 0)
+gravity = Vector2(-10, 0)
+initial_velocity_max = 50.0
+angular_velocity_min = -45.0
+angular_velocity_max = 45.0
+scale_amount_min = 0.1
+scale_amount_max = 0.2
+color_ramp = SubResource("Gradient_wndaw")
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="DeadTimer" to="." method="_on_dead_timer_timeout"]
+[connection signal="finished" from="CPUParticles2D" to="." method="_on_cpu_particles_2d_finished"]

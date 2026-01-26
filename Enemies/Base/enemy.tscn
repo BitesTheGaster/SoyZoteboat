@@ -1,0 +1,106 @@
+[gd_scene load_steps=10 format=3 uid="uid://1kr72jnyyvto"]
+
+[ext_resource type="Texture2D" uid="uid://bbaet4rqv3kbq" path="res://icon.svg" id="1_c6uq0"]
+[ext_resource type="Script" uid="uid://h51wga736a60" path="res://Enemies/Base/enemy.gd" id="1_gasfn"]
+[ext_resource type="Script" uid="uid://b3jo35qgn7xln" path="res://Controllers/EnemyController.gd" id="3_jhvkd"]
+[ext_resource type="Script" uid="uid://b3ds8eytb4r7k" path="res://StateMachines/Enemy/EnemyStateMachine.gd" id="4_oys17"]
+[ext_resource type="Script" uid="uid://cgt8b4murvuqd" path="res://StateMachines/Enemy/IdleEnemyState.gd" id="5_ay45o"]
+[ext_resource type="Script" uid="uid://dnvp048gthuw6" path="res://StateMachines/Enemy/ChaseEnemyState.gd" id="6_gasgf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gasfn"]
+size = Vector2(64, 64)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ay45o"]
+a = Vector2(0, -74)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gasgf"]
+radius = 64.0
+height = 1024.0
+
+[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_gasfn")
+
+[node name="Sprite" type="Node2D" parent="."]
+
+[node name="Head" type="Sprite2D" parent="Sprite"]
+modulate = Color(1.3908166, 1.0694141, 9.1086497e-07, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_c6uq0")
+
+[node name="Leg" type="Sprite2D" parent="Sprite"]
+modulate = Color(5.7063603, 2.3869262, 0, 1)
+position = Vector2(-10.999998, -10.000001)
+rotation = 2.1530936
+scale = Vector2(0.0701667, 0.13395095)
+texture = ExtResource("1_c6uq0")
+
+[node name="Leg2" type="Sprite2D" parent="Sprite"]
+modulate = Color(5.7063603, 2.3869262, 0, 1)
+position = Vector2(10, -9)
+rotation = -2.1537364
+scale = Vector2(0.0701667, 0.13395095)
+texture = ExtResource("1_c6uq0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gasfn")
+
+[node name="Hitbox" type="Area2D" parent="." groups=["enemy"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_gasfn")
+
+[node name="EnemyController" type="Node" parent="." node_paths=PackedStringArray("e")]
+script = ExtResource("3_jhvkd")
+e = NodePath("..")
+metadata/_custom_type_script = "uid://b3jo35qgn7xln"
+
+[node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("e", "init_state")]
+script = ExtResource("4_oys17")
+e = NodePath("..")
+init_state = NodePath("IdleEnemyState")
+metadata/_custom_type_script = "uid://b3ds8eytb4r7k"
+
+[node name="IdleEnemyState" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("e", "c", "state_machine")]
+script = ExtResource("5_ay45o")
+e = NodePath("../..")
+c = NodePath("../../EnemyController")
+state_machine = NodePath("..")
+metadata/_custom_type_script = "uid://cgt8b4murvuqd"
+
+[node name="ChaseEnemyState" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("e", "c", "state_machine")]
+script = ExtResource("6_gasgf")
+e = NodePath("../..")
+c = NodePath("../../EnemyController")
+state_machine = NodePath("..")
+metadata/_custom_type_script = "uid://dnvp048gthuw6"
+
+[node name="Checks" type="Node2D" parent="."]
+
+[node name="Right" type="Area2D" parent="Checks"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checks/Right"]
+position = Vector2(40, 32)
+shape = SubResource("SegmentShape2D_ay45o")
+
+[node name="Left" type="Area2D" parent="Checks"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checks/Left"]
+position = Vector2(-40, 32)
+shape = SubResource("SegmentShape2D_ay45o")
+
+[node name="ChaseRange" type="Area2D" parent="Checks"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checks/ChaseRange"]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_gasgf")
+
+[node name="InvFrames" type="Timer" parent="."]
+wait_time = 0.33
+one_shot = true
+
+[connection signal="timeout" from="InvFrames" to="EnemyController" method="_on_inv_frames_timeout"]

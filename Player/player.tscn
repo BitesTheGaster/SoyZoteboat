@@ -19,7 +19,8 @@ colors = PackedColorArray(1, 0, 0, 1, 0.9957656, 1, 0.31805596, 1)
 offsets = PackedFloat32Array(0, 0.74666667, 1)
 colors = PackedColorArray(0, 0, 0, 1, 0.827451, 0.3254902, 0.31764707, 1, 1, 1, 1, 0)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+z_index = 1
 script = ExtResource("1_4ntmi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -70,7 +71,7 @@ scale_amount_min = 0.25
 scale_amount_max = 0.25
 color_ramp = SubResource("Gradient_od3ui")
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." groups=["player"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_4ntmi")

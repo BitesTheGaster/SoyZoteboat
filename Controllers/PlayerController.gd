@@ -33,7 +33,7 @@ func _process(delta: float) -> void:
 		p.jumping = false
 	elif Input.is_action_just_pressed("Jump") and p.velocity.y <= 0:
 		p.jumping = true
-	if p.is_on_floor() and not p.canDash and not p.dashing:
+	if p.is_on_floor() and not p.canDash:
 		p.canDash = true
 	
 
@@ -56,6 +56,7 @@ func handle_physics(delta: float):
 	if p.pogo_velocity.y:
 		p.velocity.y = p.pogo_velocity.y
 		p.canDash = p.canDash or p.pogo_velocity.y < 0
+		if p.canDash: p.dash_delay.stop()
 		p.pogo_velocity.y = 0
 	
 	if p.active_input:
