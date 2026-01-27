@@ -59,6 +59,10 @@ func handle_physics(delta: float):
 		if p.canDash: p.dash_delay.stop()
 		p.pogo_velocity.y = 0
 	
+	if p.damage_velocity:
+		p.velocity = p.damage_velocity
+		p.damage_velocity = Vector2.ZERO
+	
 	if p.active_input:
 		# Controlable jump height
 		if p.jumping and Input.is_action_just_released("Jump"):
@@ -130,3 +134,10 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		p.canDash = true
 		p.dashing = false
 		p.attacking = false
+	elif area.is_in_group("enemy") and not p.is_invincible:
+		p.damage_particles.emitting = true
+		p.is_invincible = true
+		p.inv_frames.start()
+		p.Health -= 1
+		p.hud.update_health(p.Health)
+		p.damage_velocity = Vector2((p.global_position.x - area.global_position.x)*20, -300)

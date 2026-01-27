@@ -4,7 +4,9 @@ func _ready() -> void:
 	name = "chase"
 
 func enter():
-	pass
+	if e.leg and e.leg2:
+		e.leg.show()
+		e.leg2.show()
 
 func exit():
 	pass
@@ -16,4 +18,7 @@ func update(delta: float):
 	pass
 
 func update_physics(delta: float):
-	pass
+	c.handle_damage()
+	c.handle_movement(e.CHASE_SPEED)
+	c.handle_chase()
+	c.handle_physics(delta)

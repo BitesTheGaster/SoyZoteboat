@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cuibpfxcxwioa"]
+[gd_scene format=3 uid="uid://cuibpfxcxwioa"]
 
 [ext_resource type="Texture2D" uid="uid://bbaet4rqv3kbq" path="res://icon.svg" id="1_36otu"]
 [ext_resource type="Script" uid="uid://drs3ehq4sl5l6" path="res://Player/slash.gd" id="1_wndaw"]
@@ -10,24 +10,24 @@ size = Vector2(96, 96)
 offsets = PackedFloat32Array(0, 0.7, 0.99333334)
 colors = PackedColorArray(18.892157, 18.892157, 18.892157, 1, 1, 1, 1, 0.52156866, 1, 1, 1, 0)
 
-[node name="Slash" type="Area2D"]
+[node name="Slash" type="Area2D" unique_id=999084455]
 script = ExtResource("1_wndaw")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=318092881]
 position = Vector2(-16, 0)
 shape = SubResource("RectangleShape2D_36otu")
 
-[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
+[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D" unique_id=1461018228]
 z_index = -1
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("1_36otu")
 
-[node name="DeadTimer" type="Timer" parent="."]
+[node name="DeadTimer" type="Timer" parent="." unique_id=947876625]
 wait_time = 0.3
 one_shot = true
 autostart = true
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=995336027]
 position = Vector2(-202, 0)
 emitting = false
 amount = 16

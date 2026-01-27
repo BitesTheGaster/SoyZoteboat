@@ -9,14 +9,17 @@ class_name Enemy extends CharacterBody2D
 @onready var chase_range : Area2D = $Checks/ChaseRange
 @onready var inv_frames : Timer = $InvFrames
 
-const IDLE_SPEED = 100.0
-const CHASE_SPEED = 200.0
+const IDLE_SPEED = 50.0
+const CHASE_SPEED = 150.0
 const KNOCKBACK_MULTIPLIER = 1.0
 const G = Vector2(0, 980)
 
 var is_invincible := false
 
 var move_dir := 0.0
+var target : Player
+var can_go_right := true
+var can_go_left := true
 
 var knockback := Vector2.ZERO
 var health := 15

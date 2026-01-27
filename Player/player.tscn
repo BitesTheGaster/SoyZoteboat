@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://mhuwb6ow65fv"]
+[gd_scene format=3 uid="uid://mhuwb6ow65fv"]
 
 [ext_resource type="Script" uid="uid://dl4vgh1li0kdc" path="res://Player/player.gd" id="1_4ntmi"]
 [ext_resource type="Texture2D" uid="uid://bbaet4rqv3kbq" path="res://icon.svg" id="1_l8h54"]
@@ -19,19 +19,19 @@ colors = PackedColorArray(1, 0, 0, 1, 0.9957656, 1, 0.31805596, 1)
 offsets = PackedFloat32Array(0, 0.74666667, 1)
 colors = PackedColorArray(0, 0, 0, 1, 0.827451, 0.3254902, 0.31764707, 1, 1, 1, 1, 0)
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D" unique_id=125308380 groups=["player"]]
 z_index = 1
 script = ExtResource("1_4ntmi")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2003201435]
 shape = SubResource("RectangleShape2D_4ntmi")
 
-[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
+[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D" unique_id=1282250506]
 modulate = Color(0, 1, 0, 1)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_l8h54")
 
-[node name="DashParticles" type="CPUParticles2D" parent="CollisionShape2D/Sprite2D"]
+[node name="DashParticles" type="CPUParticles2D" parent="CollisionShape2D/Sprite2D" unique_id=330193546]
 show_behind_parent = true
 scale = Vector2(2, 2)
 emitting = false
@@ -53,7 +53,7 @@ scale_amount_min = 0.2
 scale_amount_max = 0.2
 color_ramp = SubResource("Gradient_vtle1")
 
-[node name="DamageParticles" type="CPUParticles2D" parent="CollisionShape2D/Sprite2D"]
+[node name="DamageParticles" type="CPUParticles2D" parent="CollisionShape2D/Sprite2D" unique_id=1487419449]
 emitting = false
 amount = 10
 texture = ExtResource("1_l8h54")
@@ -71,63 +71,63 @@ scale_amount_min = 0.25
 scale_amount_max = 0.25
 color_ramp = SubResource("Gradient_od3ui")
 
-[node name="Hitbox" type="Area2D" parent="." groups=["player"]]
+[node name="Hitbox" type="Area2D" parent="." unique_id=47835288 groups=["player"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=300733209]
 shape = SubResource("RectangleShape2D_4ntmi")
 
-[node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("p")]
+[node name="PlayerController" type="Node" parent="." unique_id=1932293558 node_paths=PackedStringArray("p")]
 script = ExtResource("8_od3ui")
 p = NodePath("..")
 metadata/_custom_type_script = "uid://bguayw2envskl"
 
-[node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("p", "init_state")]
+[node name="PlayerStateMachine" type="Node" parent="." unique_id=1067965662 node_paths=PackedStringArray("p", "init_state")]
 script = ExtResource("3_btcbx")
 p = NodePath("..")
 init_state = NodePath("IdlePlayerState")
 metadata/_custom_type_script = "uid://dxhrjk2cr86f"
 
-[node name="AirbornePlayerState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("p", "c", "state_machine")]
+[node name="AirbornePlayerState" type="Node" parent="PlayerStateMachine" unique_id=1153616268 node_paths=PackedStringArray("p", "c", "state_machine")]
 script = ExtResource("4_fhl08")
 p = NodePath("../..")
 c = NodePath("../../PlayerController")
 state_machine = NodePath("..")
 metadata/_custom_type_script = "uid://dxegs8j4j88pu"
 
-[node name="IdlePlayerState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("p", "c", "state_machine")]
+[node name="IdlePlayerState" type="Node" parent="PlayerStateMachine" unique_id=1552146360 node_paths=PackedStringArray("p", "c", "state_machine")]
 script = ExtResource("5_vtle1")
 p = NodePath("../..")
 c = NodePath("../../PlayerController")
 state_machine = NodePath("..")
 metadata/_custom_type_script = "uid://hc45ciqlslcx"
 
-[node name="MovePlayerState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("p", "c", "state_machine")]
+[node name="MovePlayerState" type="Node" parent="PlayerStateMachine" unique_id=1389595542 node_paths=PackedStringArray("p", "c", "state_machine")]
 script = ExtResource("6_od3ui")
 p = NodePath("../..")
 c = NodePath("../../PlayerController")
 state_machine = NodePath("..")
 metadata/_custom_type_script = "uid://00v86i5iyjrc"
 
-[node name="SlashCenter" type="Node2D" parent="."]
+[node name="SlashCenter" type="Node2D" parent="." unique_id=1862290898]
 
-[node name="SlashPos" type="Marker2D" parent="SlashCenter"]
+[node name="SlashPos" type="Marker2D" parent="SlashCenter" unique_id=802818838]
 position = Vector2(64, 0)
 
-[node name="Timers" type="Node" parent="."]
+[node name="Timers" type="Node" parent="." unique_id=300822098]
 
-[node name="DashLength" type="Timer" parent="Timers"]
+[node name="DashLength" type="Timer" parent="Timers" unique_id=602155454]
 wait_time = 0.1
 one_shot = true
 
-[node name="DashDelay" type="Timer" parent="Timers"]
+[node name="DashDelay" type="Timer" parent="Timers" unique_id=909092208]
 wait_time = 0.3
 one_shot = true
 
-[node name="AttackDelay" type="Timer" parent="Timers"]
+[node name="AttackDelay" type="Timer" parent="Timers" unique_id=1278097822]
 wait_time = 0.1
 one_shot = true
 
-[node name="InvFrames" type="Timer" parent="Timers"]
+[node name="InvFrames" type="Timer" parent="Timers" unique_id=515006180]
 wait_time = 0.5
 one_shot = true
 

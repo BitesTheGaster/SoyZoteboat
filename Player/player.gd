@@ -44,3 +44,4 @@ var move_dir := 0.0
 var last_dir := 1.0
 var pogo_velocity := Vector2.ZERO
 var current_speed := 0.0
+var damage_velocity := Vector2.ZERO
