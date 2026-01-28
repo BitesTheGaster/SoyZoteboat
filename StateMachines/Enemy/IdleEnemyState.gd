@@ -4,6 +4,9 @@ func _ready() -> void:
 	name = "idle"
 
 func enter():
+	if e.dash_delay: e.dash_delay.stop()
+	if e.dash_time: e.dash_time.stop()
+	e.is_dashing = false
 	e.move_dir = 0
 	if e.leg and e.leg2:
 		e.leg.hide()

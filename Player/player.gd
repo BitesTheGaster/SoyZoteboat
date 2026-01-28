@@ -11,6 +11,8 @@ class_name Player extends CharacterBody2D
 @onready var inv_frames : Timer = $Timers/InvFrames
 @onready var dash_delay : Timer = $Timers/DashDelay
 @onready var collision : CollisionShape2D = $CollisionShape2D
+@onready var hitbox : Area2D = $Hitbox
+@onready var hitbox_collision : CollisionShape2D = $Hitbox/CollisionShape2D
 @onready var sprite : Sprite2D = $CollisionShape2D/Sprite2D
 @onready var dash_particles : CPUParticles2D = $CollisionShape2D/Sprite2D/DashParticles
 @onready var damage_particles : CPUParticles2D = $CollisionShape2D/Sprite2D/DamageParticles

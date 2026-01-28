@@ -18,7 +18,7 @@ radius = 128.0
 height = 1024.0
 
 [node name="Enemy" type="CharacterBody2D" unique_id=105650447 groups=["enemy"]]
-collision_layer = 2
+collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_gasfn")
 
@@ -108,11 +108,20 @@ one_shot = true
 [node name="RageTime" type="Timer" parent="." unique_id=2097802897]
 one_shot = true
 
+[node name="DashTime" type="Timer" parent="." unique_id=1152677175]
+wait_time = 0.2
+one_shot = true
+
+[node name="DashDelay" type="Timer" parent="." unique_id=1421525888]
+one_shot = true
+
 [connection signal="body_entered" from="Checks/Right" to="EnemyController" method="_on_right_body_entered"]
 [connection signal="body_exited" from="Checks/Right" to="EnemyController" method="_on_right_body_exited"]
 [connection signal="body_entered" from="Checks/Left" to="EnemyController" method="_on_left_body_entered"]
 [connection signal="body_exited" from="Checks/Left" to="EnemyController" method="_on_left_body_exited"]
-[connection signal="area_entered" from="Checks/ChaseRange" to="EnemyStateMachine" method="_on_chase_range_area_entered"]
-[connection signal="area_exited" from="Checks/ChaseRange" to="EnemyStateMachine" method="_on_chase_range_area_exited"]
+[connection signal="body_entered" from="Checks/ChaseRange" to="EnemyStateMachine" method="_on_chase_range_body_entered"]
+[connection signal="body_exited" from="Checks/ChaseRange" to="EnemyStateMachine" method="_on_chase_range_body_exited"]
 [connection signal="timeout" from="InvFrames" to="EnemyController" method="_on_inv_frames_timeout"]
 [connection signal="timeout" from="RageTime" to="EnemyStateMachine" method="_on_rage_time_timeout"]
+[connection signal="timeout" from="DashTime" to="EnemyStateMachine" method="_on_dash_time_timeout"]
+[connection signal="timeout" from="DashDelay" to="EnemyStateMachine" method="_on_dash_delay_timeout"]

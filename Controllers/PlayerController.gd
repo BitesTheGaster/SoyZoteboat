@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 		p.slash_center.rotation = ang.angle()
 	
 	# Face player to last pressed direction
-	p.sprite.flip_v = p.last_dir == -1
+	p.sprite.flip_h = p.last_dir == -1
 	
 	# Updating base variables
 	p.falling = p.velocity.y > 0
@@ -117,6 +117,7 @@ func _on_dash_length_timeout() -> void:
 	p.dash_delay.start()
 
 func _on_inv_frames_timeout() -> void:
+	p.hitbox_collision.set_deferred("disabled", false)
 	p.is_invincible = false
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
@@ -127,17 +128,24 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		p.inv_frames.start()
 		p.Health -= 1
 		p.hud.update_health(p.Health)
-		#reset player position
-		p.position = Vector2.ZERO
-		p.velocity = Vector2.ZERO
+		
 		p.canAttack = true
 		p.canDash = true
 		p.dashing = false
 		p.attacking = false
+		#reset player position
+		p.position = Vector2.ZERO
+		p.velocity = Vector2.ZERO
+		p.hitbox_collision.set_deferred("disabled", true)
 	elif area.is_in_group("enemy") and not p.is_invincible:
 		p.damage_particles.emitting = true
 		p.is_invincible = true
 		p.inv_frames.start()
 		p.Health -= 1
+		p.canAttack = true
+		p.canDash = true
+		p.dashing = false
+		p.attacking = false
 		p.hud.update_health(p.Health)
 		p.damage_velocity = Vector2((p.global_position.x - area.global_position.x)*20, -300)
+		p.hitbox_collision.set_deferred("disabled", true)

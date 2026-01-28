@@ -4,6 +4,7 @@ func _ready() -> void:
 	name = "chase"
 
 func enter():
+	if e.dash_delay: e.dash_delay.start()
 	if e.leg and e.leg2:
 		e.leg.show()
 		e.leg2.show()
@@ -19,6 +20,9 @@ func update(delta: float):
 
 func update_physics(delta: float):
 	c.handle_damage()
-	c.handle_movement(e.CHASE_SPEED)
+	if e.is_dashing:
+		c.handle_movement(e.DASH_SPEED)
+	else:
+		c.handle_movement(e.CHASE_SPEED)
 	c.handle_chase()
 	c.handle_physics(delta)

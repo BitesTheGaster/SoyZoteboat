@@ -128,7 +128,6 @@ wait_time = 0.1
 one_shot = true
 
 [node name="InvFrames" type="Timer" parent="Timers" unique_id=515006180]
-wait_time = 0.5
 one_shot = true
 
 [connection signal="area_entered" from="Hitbox" to="PlayerController" method="_on_hitbox_area_entered"]

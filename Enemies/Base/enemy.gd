@@ -8,15 +8,20 @@ class_name Enemy extends CharacterBody2D
 @onready var left : Area2D = $Checks/Left
 @onready var chase_range : Area2D = $Checks/ChaseRange
 @onready var inv_frames : Timer = $InvFrames
+@onready var dash_time : Timer = $DashTime
+@onready var dash_delay : Timer = $DashDelay
+
 
 const IDLE_SPEED = 50.0
 const CHASE_SPEED = 150.0
+const DASH_SPEED = 750.0
 const KNOCKBACK_MULTIPLIER = 1.0
 const G = Vector2(0, 980)
 
 var is_invincible := false
-
+var is_dashing := false
 var move_dir := 0.0
+var last_dir := 0.0
 var target : Player
 var can_go_right := true
 var can_go_left := true

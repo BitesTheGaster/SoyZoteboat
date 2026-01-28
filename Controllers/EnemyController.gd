@@ -38,6 +38,7 @@ func handle_damage():
 
 func handle_chase():
 	if not e.target: return
+	if e.is_dashing: return
 	if e.position.x < e.target.position.x:
 		if e.can_go_right: e.move_dir = 1
 		else: e.move_dir = 0
