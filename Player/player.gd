@@ -24,9 +24,13 @@ const JUMP_VELOCITY := -600.0
 @export_category("Stats")
 @export var Health := 5
 @export var Damage := 5
+@export_category("Abilities")
+@export var have_dash := false
+
+var max_soul := 99
+var current_soul := 0
 
 var is_gameplay := true
-
 var active_input := true
 var relinquished := false
 var in_menu := false

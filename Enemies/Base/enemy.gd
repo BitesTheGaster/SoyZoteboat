@@ -10,6 +10,8 @@ class_name Enemy extends CharacterBody2D
 @onready var inv_frames : Timer = $InvFrames
 @onready var dash_time : Timer = $DashTime
 @onready var dash_delay : Timer = $DashDelay
+@onready var dash_anim_delay : Timer = $DashAnimDelay
+@onready var dash_particles : CPUParticles2D = $DashParticles
 
 
 const IDLE_SPEED = 50.0

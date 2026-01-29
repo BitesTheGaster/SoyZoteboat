@@ -17,6 +17,9 @@ a = Vector2(0, -74)
 radius = 128.0
 height = 1024.0
 
+[sub_resource type="Gradient" id="Gradient_ay45o"]
+colors = PackedColorArray(1, 0, 0, 1, 0, 0, 0, 0)
+
 [node name="Enemy" type="CharacterBody2D" unique_id=105650447 groups=["enemy"]]
 collision_layer = 0
 collision_mask = 2
@@ -113,7 +116,31 @@ wait_time = 0.2
 one_shot = true
 
 [node name="DashDelay" type="Timer" parent="." unique_id=1421525888]
+wait_time = 0.8
 one_shot = true
+
+[node name="DashAnimDelay" type="Timer" parent="." unique_id=575628964]
+wait_time = 0.2
+one_shot = true
+
+[node name="DashParticles" type="CPUParticles2D" parent="." unique_id=1733860365]
+position = Vector2(0, -24)
+emitting = false
+amount = 1
+texture = ExtResource("1_c6uq0")
+lifetime = 0.2
+one_shot = true
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(32, 8)
+gravity = Vector2(0, 300)
+angular_velocity_min = -15.0
+angular_velocity_max = 15.0
+angle_min = -30.0
+angle_max = 30.0
+scale_amount_min = 0.3
+scale_amount_max = 0.3
+color_ramp = SubResource("Gradient_ay45o")
 
 [connection signal="body_entered" from="Checks/Right" to="EnemyController" method="_on_right_body_entered"]
 [connection signal="body_exited" from="Checks/Right" to="EnemyController" method="_on_right_body_exited"]
@@ -125,3 +152,4 @@ one_shot = true
 [connection signal="timeout" from="RageTime" to="EnemyStateMachine" method="_on_rage_time_timeout"]
 [connection signal="timeout" from="DashTime" to="EnemyStateMachine" method="_on_dash_time_timeout"]
 [connection signal="timeout" from="DashDelay" to="EnemyStateMachine" method="_on_dash_delay_timeout"]
+[connection signal="timeout" from="DashAnimDelay" to="EnemyStateMachine" method="_on_dash_anim_delay_timeout"]

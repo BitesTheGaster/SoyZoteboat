@@ -26,22 +26,34 @@ text = "Current state: "
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=2020938164]
 layout_mode = 2
 
-[node name="1" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=700376899]
+[node name="CurrentSoul" type="ProgressBar" parent="VBoxContainer/HBoxContainer" unique_id=375894855]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
+max_value = 99.0
+fill_mode = 3
+show_percentage = false
+
+[node name="Health" type="HBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=1138189385]
+layout_mode = 2
+
+[node name="1" type="TextureRect" parent="VBoxContainer/HBoxContainer/Health" unique_id=700376899]
 layout_mode = 2
 texture = ExtResource("2_emf2s")
 
-[node name="2" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=712819478]
+[node name="2" type="TextureRect" parent="VBoxContainer/HBoxContainer/Health" unique_id=712819478]
 layout_mode = 2
 texture = ExtResource("2_emf2s")
 
-[node name="3" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=2120247898]
+[node name="3" type="TextureRect" parent="VBoxContainer/HBoxContainer/Health" unique_id=2120247898]
 layout_mode = 2
 texture = ExtResource("2_emf2s")
 
-[node name="4" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=1136120249]
+[node name="4" type="TextureRect" parent="VBoxContainer/HBoxContainer/Health" unique_id=1136120249]
 layout_mode = 2
 texture = ExtResource("2_emf2s")
 
-[node name="5" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=1267484184]
+[node name="5" type="TextureRect" parent="VBoxContainer/HBoxContainer/Health" unique_id=1267484184]
 layout_mode = 2
 texture = ExtResource("2_emf2s")

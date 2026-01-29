@@ -11,7 +11,7 @@ func _process(delta: float) -> void:
 	
 	# Make player purple while invinsible
 	if p.is_invincible:
-		p.sprite.modulate = Color.PURPLE
+		p.sprite.modulate = Color.BLUE_VIOLET
 	else:
 		p.sprite.modulate = Color.GREEN
 	
@@ -59,6 +59,7 @@ func handle_physics(delta: float):
 		if p.canDash: p.dash_delay.stop()
 		p.pogo_velocity.y = 0
 	
+	# Add damage knockback
 	if p.damage_velocity:
 		p.velocity = p.damage_velocity
 		p.damage_velocity = Vector2.ZERO
@@ -78,8 +79,7 @@ func handle_input():
 			p.last_dir = p.raw_dir.x
 		
 		# Get dash input
-		p.canDash = p.canDash and p.dash_delay.is_stopped()
-		if Input.is_action_just_pressed("Dash") and p.canDash:
+		if Input.is_action_just_pressed("Dash") and p.canDash and not p.dashing and p.dash_delay.is_stopped():
 			p.dash_particles.emitting = true
 			p.dashing = true
 			p.canDash = false

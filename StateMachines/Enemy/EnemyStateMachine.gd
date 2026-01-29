@@ -32,5 +32,11 @@ func _on_dash_time_timeout() -> void:
 
 func _on_dash_delay_timeout() -> void:
 	if current_state.name == "chase":
+		e.dash_anim_delay.start()
+		e.dash_particles.emitting = true
+
+
+func _on_dash_anim_delay_timeout() -> void:
+	if current_state.name == "chase":
 		e.is_dashing = true
 		e.dash_time.start()
