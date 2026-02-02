@@ -5,6 +5,7 @@ func _ready() -> void:
 
 func enter():
 	if p.hud: p.hud.change_current_state(name)
+	p.canFocus = false
 
 func exit():
 	pass

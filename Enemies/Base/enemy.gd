@@ -15,8 +15,8 @@ class_name Enemy extends CharacterBody2D
 
 
 const IDLE_SPEED = 50.0
-const CHASE_SPEED = 150.0
-const DASH_SPEED = 750.0
+const CHASE_SPEED = 100.0
+const DASH_SPEED = 600.0
 const KNOCKBACK_MULTIPLIER = 1.0
 const G = Vector2(0, 980)
 

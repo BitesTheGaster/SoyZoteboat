@@ -5,6 +5,9 @@ func _ready() -> void:
 
 func enter():
 	if p.hud: p.hud.change_current_state(name)
+	p.canFocus = true
+	if p.current_soul < 33:
+		p.canFocus = false
 
 func exit():
 	pass

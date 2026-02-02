@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://0n613sa6lspk"]
 
-[ext_resource type="Texture2D" uid="uid://bbaet4rqv3kbq" path="res://icon.svg" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://mhuwb6ow65fv" path="res://Player/player.tscn" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://dvyd5ef5hgi70" path="res://Player/camera_2d.gd" id="3_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://bs5qrf2drwwte" path="res://UI/Hud/hud.tscn" id="3_h2yge"]
+[ext_resource type="Texture2D" uid="uid://du2ib34160300" path="res://placeholder.png" id="5_7mycd"]
 [ext_resource type="PackedScene" uid="uid://1kr72jnyyvto" path="res://Enemies/Base/enemy.tscn" id="5_lquwl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ig7tw"]
@@ -80,7 +80,7 @@ shape = SubResource("RectangleShape2D_ig7tw")
 [node name="Sprite2D" type="Sprite2D" parent="TempMap/StaticBody2D/CollisionShape2D" unique_id=1133032362]
 modulate = Color(0.3403393, 0.34033933, 0.3403393, 1)
 scale = Vector2(10, 1)
-texture = ExtResource("1_ig7tw")
+texture = ExtResource("5_7mycd")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="TempMap" unique_id=1955009089 groups=["block"]]
 position = Vector2(-1531, -238)
@@ -94,7 +94,7 @@ shape = SubResource("RectangleShape2D_ig7tw")
 [node name="Sprite2D" type="Sprite2D" parent="TempMap/StaticBody2D2/CollisionShape2D" unique_id=1518422865]
 modulate = Color(0.3403393, 0.34033933, 0.3403393, 1)
 scale = Vector2(10, 1)
-texture = ExtResource("1_ig7tw")
+texture = ExtResource("5_7mycd")
 
 [node name="Area2D4" type="Area2D" parent="TempMap" unique_id=78000561 groups=["spikes"]]
 position = Vector2(-1025, -208)
@@ -107,7 +107,7 @@ shape = SubResource("RectangleShape2D_0xm2m")
 [node name="Sprite2D" type="Sprite2D" parent="TempMap/Area2D4/CollisionShape2D" unique_id=948159116]
 modulate = Color(1, 0, 0, 1)
 scale = Vector2(1, 0.5)
-texture = ExtResource("1_ig7tw")
+texture = ExtResource("5_7mycd")
 
 [node name="Area2D3" type="Area2D" parent="TempMap" unique_id=2132472016 groups=["spikes"]]
 position = Vector2(-652, -120)
@@ -120,7 +120,7 @@ shape = SubResource("RectangleShape2D_0xm2m")
 [node name="Sprite2D" type="Sprite2D" parent="TempMap/Area2D3/CollisionShape2D" unique_id=489893216]
 modulate = Color(1, 0, 0, 1)
 scale = Vector2(1, 0.5)
-texture = ExtResource("1_ig7tw")
+texture = ExtResource("5_7mycd")
 
 [node name="Area2D2" type="Area2D" parent="TempMap" unique_id=392005733 groups=["spikes"]]
 position = Vector2(-300, -40)
@@ -133,7 +133,7 @@ shape = SubResource("RectangleShape2D_0xm2m")
 [node name="Sprite2D" type="Sprite2D" parent="TempMap/Area2D2/CollisionShape2D" unique_id=1406651039]
 modulate = Color(1, 0, 0, 1)
 scale = Vector2(1, 0.5)
-texture = ExtResource("1_ig7tw")
+texture = ExtResource("5_7mycd")
 
 [node name="Area2D" type="Area2D" parent="TempMap" unique_id=333198454 groups=["spikes"]]
 position = Vector2(256, 32)
@@ -146,6 +146,6 @@ shape = SubResource("RectangleShape2D_0xm2m")
 [node name="Sprite2D" type="Sprite2D" parent="TempMap/Area2D/CollisionShape2D" unique_id=1900498384]
 modulate = Color(1, 0, 0, 1)
 scale = Vector2(1, 0.5)
-texture = ExtResource("1_ig7tw")
+texture = ExtResource("5_7mycd")
 
 [connection signal="timeout" from="Camera2D/PogoShakeBuffer" to="Camera2D" method="_on_pogo_shake_buffer_timeout"]

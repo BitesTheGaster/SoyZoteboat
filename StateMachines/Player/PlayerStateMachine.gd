@@ -10,6 +10,8 @@ func _process(delta: float) -> void:
 	
 	if !p.is_on_floor():
 		change_state("airborne")
+	elif current_state.name == "focus" and Input.is_action_pressed("Heal"):
+		pass
 	elif Input.is_action_pressed("Right") or Input.is_action_pressed("Left"):
 		change_state("move")
 	else:

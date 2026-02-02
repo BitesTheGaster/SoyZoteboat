@@ -1,6 +1,7 @@
 class_name PlayerController extends Node
 
 @export var p: Player
+@export var m: PlayerStateMachine
 
 func _process(delta: float) -> void:
 	if not p.is_gameplay: return
@@ -33,7 +34,7 @@ func _process(delta: float) -> void:
 		p.jumping = false
 	elif Input.is_action_just_pressed("Jump") and p.velocity.y <= 0:
 		p.jumping = true
-	if p.is_on_floor() and not p.canDash:
+	if p.is_on_floor() and not (p.canDash and not p.attacking):
 		p.canDash = true
 	
 
@@ -56,7 +57,7 @@ func handle_physics(delta: float):
 	if p.pogo_velocity.y:
 		p.velocity.y = p.pogo_velocity.y
 		p.canDash = p.canDash or p.pogo_velocity.y < 0
-		if p.canDash: p.dash_delay.stop()
+		if p.canDash and not p.attacking: p.dash_delay.stop()
 		p.pogo_velocity.y = 0
 	
 	# Add damage knockback
@@ -79,11 +80,16 @@ func handle_input():
 			p.last_dir = p.raw_dir.x
 		
 		# Get dash input
-		if Input.is_action_just_pressed("Dash") and p.canDash and not p.dashing and p.dash_delay.is_stopped():
+		if Input.is_action_just_pressed("Dash") and p.canDash and not p.dashing and p.dash_delay.is_stopped() and not p.attacking:
 			p.dash_particles.emitting = true
 			p.dashing = true
 			p.canDash = false
 			p.dash_length.start()
+		
+		# Get focus input
+		if p.canFocus and m.current_state.name != "focus":
+			if Input.is_action_pressed("Heal"):
+				m.change_state("focus")
 
 func handle_movement():
 	# Move player left and right
@@ -105,7 +111,7 @@ func handle_jump():
 func handle_attacks():
 	if p.active_input:
 		# Create slash
-		if Input.is_action_just_pressed("Slash") and p.canAttack:
+		if Input.is_action_just_pressed("Slash") and p.canAttack and not p.dashing:
 			var slash_scene = p.slash_scene.instantiate()
 			p.slash_pos.add_child(slash_scene)
 
@@ -149,3 +155,15 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		p.hud.update_health(p.Health)
 		p.damage_velocity = Vector2((p.global_position.x - area.global_position.x)*20, -300)
 		p.hitbox_collision.set_deferred("disabled", true)
+
+
+func _on_soul_drain_timeout() -> void:
+	p.current_soul -= 1
+	p.current_soul = max(0, min(p.current_soul, 99))
+	p.burned_soul += 1
+	if p.burned_soul >= 33:
+		p.Health += 1
+		p.Health = min(p.Health, p.maxHealth)
+		p.hud.update_health(p.Health)
+		p.burned_soul -= 33
+	p.hud.update_soul(p.current_soul)

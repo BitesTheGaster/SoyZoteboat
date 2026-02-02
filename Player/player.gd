@@ -10,6 +10,7 @@ class_name Player extends CharacterBody2D
 @onready var attack_delay : Timer = $Timers/AttackDelay
 @onready var inv_frames : Timer = $Timers/InvFrames
 @onready var dash_delay : Timer = $Timers/DashDelay
+@onready var soul_drain : Timer = $Timers/SoulDrain
 @onready var collision : CollisionShape2D = $CollisionShape2D
 @onready var hitbox : Area2D = $Hitbox
 @onready var hitbox_collision : CollisionShape2D = $Hitbox/CollisionShape2D
@@ -23,12 +24,14 @@ const JUMP_VELOCITY := -600.0
 
 @export_category("Stats")
 @export var Health := 5
+@export var maxHealth := 5
 @export var Damage := 5
 @export_category("Abilities")
 @export var have_dash := false
 
 var max_soul := 99
 var current_soul := 0
+var burned_soul := 0
 
 var is_gameplay := true
 var active_input := true
@@ -37,6 +40,7 @@ var in_menu := false
 
 var canAttack := true
 var canDash := true
+var canFocus := true
 
 var jumping := false
 var falling := false

@@ -31,8 +31,9 @@ func _on_area_entered(area: Area2D) -> void:
 		p.camera.pogo_velocity_buffer = p.pogo_velocity
 		can_pogo = false
 	elif area.is_in_group("enemy"):
-		p.current_soul += 11
-		p.current_soul = min(p.current_soul, 99)
+		if not area.get_parent().is_invincible:
+			p.current_soul += 11
+		p.current_soul = max(0, min(p.current_soul, 99))
 		p.hud.update_soul(p.current_soul)
 		if can_pogo:
 			p.pogo_velocity = -Vector2.from_angle(global_rotation) * 350

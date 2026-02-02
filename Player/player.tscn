@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://mhuwb6ow65fv"]
 
 [ext_resource type="Script" uid="uid://dl4vgh1li0kdc" path="res://Player/player.gd" id="1_4ntmi"]
-[ext_resource type="Texture2D" uid="uid://bbaet4rqv3kbq" path="res://icon.svg" id="1_l8h54"]
+[ext_resource type="Texture2D" uid="uid://du2ib34160300" path="res://placeholder.png" id="2_od3ui"]
 [ext_resource type="Script" uid="uid://dxhrjk2cr86f" path="res://StateMachines/Player/PlayerStateMachine.gd" id="3_btcbx"]
 [ext_resource type="Script" uid="uid://dxegs8j4j88pu" path="res://StateMachines/Player/AirbornePlayerState.gd" id="4_fhl08"]
 [ext_resource type="Script" uid="uid://hc45ciqlslcx" path="res://StateMachines/Player/IdlePlayerState.gd" id="5_vtle1"]
 [ext_resource type="Script" uid="uid://00v86i5iyjrc" path="res://StateMachines/Player/MovePlayerState.gd" id="6_od3ui"]
+[ext_resource type="Script" uid="uid://ks0pf7irasla" path="res://StateMachines/Player/FocusPlayerState.gd" id="8_00tjw"]
 [ext_resource type="Script" uid="uid://bguayw2envskl" path="res://Controllers/PlayerController.gd" id="8_od3ui"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ntmi"]
@@ -29,14 +30,14 @@ shape = SubResource("RectangleShape2D_4ntmi")
 [node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D" unique_id=1282250506]
 modulate = Color(0, 1, 0, 1)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_l8h54")
+texture = ExtResource("2_od3ui")
 
 [node name="DashParticles" type="CPUParticles2D" parent="CollisionShape2D/Sprite2D" unique_id=330193546]
 show_behind_parent = true
 scale = Vector2(2, 2)
 emitting = false
 amount = 57
-texture = ExtResource("1_l8h54")
+texture = ExtResource("2_od3ui")
 lifetime = 0.2
 one_shot = true
 lifetime_randomness = 0.1
@@ -56,7 +57,7 @@ color_ramp = SubResource("Gradient_vtle1")
 [node name="DamageParticles" type="CPUParticles2D" parent="CollisionShape2D/Sprite2D" unique_id=1487419449]
 emitting = false
 amount = 10
-texture = ExtResource("1_l8h54")
+texture = ExtResource("2_od3ui")
 lifetime = 0.5
 one_shot = true
 explosiveness = 0.9
@@ -76,9 +77,10 @@ color_ramp = SubResource("Gradient_od3ui")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=300733209]
 shape = SubResource("RectangleShape2D_4ntmi")
 
-[node name="PlayerController" type="Node" parent="." unique_id=1932293558 node_paths=PackedStringArray("p")]
+[node name="PlayerController" type="Node" parent="." unique_id=1932293558 node_paths=PackedStringArray("p", "m")]
 script = ExtResource("8_od3ui")
 p = NodePath("..")
+m = NodePath("../PlayerStateMachine")
 metadata/_custom_type_script = "uid://bguayw2envskl"
 
 [node name="PlayerStateMachine" type="Node" parent="." unique_id=1067965662 node_paths=PackedStringArray("p", "init_state")]
@@ -108,6 +110,13 @@ c = NodePath("../../PlayerController")
 state_machine = NodePath("..")
 metadata/_custom_type_script = "uid://00v86i5iyjrc"
 
+[node name="FocusPlayerState" type="Node" parent="PlayerStateMachine" unique_id=126916377 node_paths=PackedStringArray("p", "c", "state_machine")]
+script = ExtResource("8_00tjw")
+p = NodePath("../..")
+c = NodePath("../../PlayerController")
+state_machine = NodePath("..")
+metadata/_custom_type_script = "uid://ks0pf7irasla"
+
 [node name="SlashCenter" type="Node2D" parent="." unique_id=1862290898]
 
 [node name="SlashPos" type="Marker2D" parent="SlashCenter" unique_id=802818838]
@@ -130,7 +139,11 @@ one_shot = true
 [node name="InvFrames" type="Timer" parent="Timers" unique_id=515006180]
 one_shot = true
 
+[node name="SoulDrain" type="Timer" parent="Timers" unique_id=269995934]
+wait_time = 0.05
+
 [connection signal="area_entered" from="Hitbox" to="PlayerController" method="_on_hitbox_area_entered"]
 [connection signal="timeout" from="Timers/DashLength" to="PlayerController" method="_on_dash_length_timeout"]
 [connection signal="timeout" from="Timers/AttackDelay" to="PlayerController" method="_on_attack_delay_timeout"]
 [connection signal="timeout" from="Timers/InvFrames" to="PlayerController" method="_on_inv_frames_timeout"]
+[connection signal="timeout" from="Timers/SoulDrain" to="PlayerController" method="_on_soul_drain_timeout"]
