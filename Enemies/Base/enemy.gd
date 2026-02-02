@@ -1,7 +1,6 @@
 class_name Enemy extends CharacterBody2D
 
-@onready var leg : Sprite2D = $Sprite/Leg
-@onready var leg2 : Sprite2D = $Sprite/Leg2
+@onready var rage_sprite : Sprite2D = $Sprite/Rage
 @onready var sprite : Sprite2D = $Sprite/Head
 @onready var hitbox : Area2D = $Hitbox
 @onready var right : Area2D = $Checks/Right

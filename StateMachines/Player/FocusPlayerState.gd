@@ -6,11 +6,13 @@ func _ready() -> void:
 func enter():
 	if p.hud: p.hud.change_current_state(name)
 	p.soul_drain.start()
+	p.heal_particles.emitting = true
 	p.velocity.x = 0
 	p.burned_soul = 0
 
 func exit():
 	p.soul_drain.stop()
+	p.heal_particles.emitting = false
 
 func update_input(event: InputEvent):
 	pass

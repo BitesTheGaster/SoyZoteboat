@@ -5,9 +5,8 @@ func _ready() -> void:
 
 func enter():
 	if e.dash_delay: e.dash_delay.start()
-	if e.leg and e.leg2:
-		e.leg.show()
-		e.leg2.show()
+	if e.rage_sprite:
+		e.rage_sprite.show()
 
 func exit():
 	pass

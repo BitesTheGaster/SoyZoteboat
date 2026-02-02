@@ -8,9 +8,8 @@ func enter():
 	if e.dash_time: e.dash_time.stop()
 	e.is_dashing = false
 	e.move_dir = 0
-	if e.leg and e.leg2:
-		e.leg.hide()
-		e.leg2.hide()
+	if e.rage_sprite:
+		e.rage_sprite.hide()
 
 func exit():
 	pass

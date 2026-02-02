@@ -1,10 +1,8 @@
 [gd_scene format=3 uid="uid://cuibpfxcxwioa"]
 
 [ext_resource type="Script" uid="uid://drs3ehq4sl5l6" path="res://Player/slash.gd" id="1_wndaw"]
-[ext_resource type="Texture2D" uid="uid://du2ib34160300" path="res://placeholder.png" id="2_qhgea"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_36otu"]
-size = Vector2(96, 96)
+[ext_resource type="Texture2D" uid="uid://d06222i68rtpj" path="res://Textures/Player/Slash.png" id="2_wndaw"]
+[ext_resource type="Texture2D" uid="uid://bw1oqdfbyw60h" path="res://Textures/Player/Particle.png" id="3_qhgea"]
 
 [sub_resource type="Gradient" id="Gradient_wndaw"]
 offsets = PackedFloat32Array(0, 0.7, 0.99333334)
@@ -13,17 +11,17 @@ colors = PackedColorArray(18.892157, 18.892157, 18.892157, 1, 1, 1, 1, 0.5215686
 [node name="Slash" type="Area2D" unique_id=999084455]
 script = ExtResource("1_wndaw")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=318092881]
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="." unique_id=118194217]
 position = Vector2(-16, 0)
-shape = SubResource("RectangleShape2D_36otu")
+polygon = PackedVector2Array(-48, -48, -48, 48, 0, 48, 48, 0, 0, -48)
 
 [node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D" unique_id=1461018228]
 z_index = -1
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("2_qhgea")
+texture = ExtResource("2_wndaw")
 
 [node name="DeadTimer" type="Timer" parent="." unique_id=947876625]
-wait_time = 0.3
+wait_time = 0.2
 one_shot = true
 autostart = true
 
@@ -31,7 +29,7 @@ autostart = true
 position = Vector2(-202, 0)
 emitting = false
 amount = 16
-texture = ExtResource("2_qhgea")
+texture = ExtResource("3_qhgea")
 lifetime = 2.0
 one_shot = true
 preprocess = 0.3

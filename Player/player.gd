@@ -17,6 +17,7 @@ class_name Player extends CharacterBody2D
 @onready var sprite : Sprite2D = $CollisionShape2D/Sprite2D
 @onready var dash_particles : CPUParticles2D = $CollisionShape2D/Sprite2D/DashParticles
 @onready var damage_particles : CPUParticles2D = $CollisionShape2D/Sprite2D/DamageParticles
+@onready var heal_particles : CPUParticles2D = $CollisionShape2D/Sprite2D/HealParticles
 
 const G := Vector2(0, 980)
 const SPEED := 250.0

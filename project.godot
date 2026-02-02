@@ -31,6 +31,7 @@ spikes=""
 player=""
 enemy=""
 block=""
+room_transition=""
 
 [input]
 

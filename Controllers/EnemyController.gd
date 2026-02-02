@@ -52,10 +52,8 @@ func _on_inv_frames_timeout() -> void:
 func _on_right_body_entered(body: Node2D) -> void:
 	if body.is_in_group("block"): e.can_go_right = true
 
-
 func _on_right_body_exited(body: Node2D) -> void:
 	if body.is_in_group("block"): e.can_go_right = false
-
 
 func _on_left_body_entered(body: Node2D) -> void:
 	if body.is_in_group("block"): e.can_go_left = true

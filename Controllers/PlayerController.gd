@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
 	if p.is_invincible:
 		p.sprite.modulate = Color.BLUE_VIOLET
 	else:
-		p.sprite.modulate = Color.GREEN
+		p.sprite.modulate = Color.WHITE
 	
 	# Updating slash position
 	if !p.attacking:

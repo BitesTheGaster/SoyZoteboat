@@ -1,16 +1,18 @@
 [gd_scene format=3 uid="uid://mhuwb6ow65fv"]
 
 [ext_resource type="Script" uid="uid://dl4vgh1li0kdc" path="res://Player/player.gd" id="1_4ntmi"]
-[ext_resource type="Texture2D" uid="uid://du2ib34160300" path="res://placeholder.png" id="2_od3ui"]
+[ext_resource type="Texture2D" uid="uid://dmftqyx4ifejm" path="res://Textures/Player/player.png" id="2_od3ui"]
+[ext_resource type="Texture2D" uid="uid://bw1oqdfbyw60h" path="res://Textures/Player/Particle.png" id="3_00tjw"]
 [ext_resource type="Script" uid="uid://dxhrjk2cr86f" path="res://StateMachines/Player/PlayerStateMachine.gd" id="3_btcbx"]
 [ext_resource type="Script" uid="uid://dxegs8j4j88pu" path="res://StateMachines/Player/AirbornePlayerState.gd" id="4_fhl08"]
+[ext_resource type="Texture2D" uid="uid://bn2hgfnnht0th" path="res://Textures/Player/HealParticle.png" id="4_x3vf3"]
 [ext_resource type="Script" uid="uid://hc45ciqlslcx" path="res://StateMachines/Player/IdlePlayerState.gd" id="5_vtle1"]
 [ext_resource type="Script" uid="uid://00v86i5iyjrc" path="res://StateMachines/Player/MovePlayerState.gd" id="6_od3ui"]
 [ext_resource type="Script" uid="uid://ks0pf7irasla" path="res://StateMachines/Player/FocusPlayerState.gd" id="8_00tjw"]
 [ext_resource type="Script" uid="uid://bguayw2envskl" path="res://Controllers/PlayerController.gd" id="8_od3ui"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ntmi"]
-size = Vector2(64, 64)
+size = Vector2(60, 60)
 
 [sub_resource type="Gradient" id="Gradient_vtle1"]
 offsets = PackedFloat32Array(0.02, 1)
@@ -20,6 +22,10 @@ colors = PackedColorArray(1, 0, 0, 1, 0.9957656, 1, 0.31805596, 1)
 offsets = PackedFloat32Array(0, 0.74666667, 1)
 colors = PackedColorArray(0, 0, 0, 1, 0.827451, 0.3254902, 0.31764707, 1, 1, 1, 1, 0)
 
+[sub_resource type="Gradient" id="Gradient_apopc"]
+offsets = PackedFloat32Array(0, 0.536036, 1)
+colors = PackedColorArray(18.892157, 18.892157, 18.892157, 0, 0.012617188, 0.012617188, 0.012617188, 0, 1, 1, 1, 1)
+
 [node name="Player" type="CharacterBody2D" unique_id=125308380 groups=["player"]]
 z_index = 1
 script = ExtResource("1_4ntmi")
@@ -28,8 +34,7 @@ script = ExtResource("1_4ntmi")
 shape = SubResource("RectangleShape2D_4ntmi")
 
 [node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D" unique_id=1282250506]
-modulate = Color(0, 1, 0, 1)
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.469, 0.469)
 texture = ExtResource("2_od3ui")
 
 [node name="DashParticles" type="CPUParticles2D" parent="CollisionShape2D/Sprite2D" unique_id=330193546]
@@ -37,7 +42,7 @@ show_behind_parent = true
 scale = Vector2(2, 2)
 emitting = false
 amount = 57
-texture = ExtResource("2_od3ui")
+texture = ExtResource("3_00tjw")
 lifetime = 0.2
 one_shot = true
 lifetime_randomness = 0.1
@@ -57,7 +62,7 @@ color_ramp = SubResource("Gradient_vtle1")
 [node name="DamageParticles" type="CPUParticles2D" parent="CollisionShape2D/Sprite2D" unique_id=1487419449]
 emitting = false
 amount = 10
-texture = ExtResource("2_od3ui")
+texture = ExtResource("3_00tjw")
 lifetime = 0.5
 one_shot = true
 explosiveness = 0.9
@@ -71,6 +76,26 @@ angular_velocity_max = 720.0
 scale_amount_min = 0.25
 scale_amount_max = 0.25
 color_ramp = SubResource("Gradient_od3ui")
+
+[node name="HealParticles" type="CPUParticles2D" parent="CollisionShape2D/Sprite2D" unique_id=826443419]
+emitting = false
+amount = 57
+texture = ExtResource("4_x3vf3")
+emission_shape = 3
+emission_rect_extents = Vector2(128, 64)
+direction = Vector2(0, -1)
+spread = 20.0
+gravity = Vector2(0, -50)
+initial_velocity_max = 100.0
+angular_velocity_min = -0.1
+angular_velocity_max = 0.1
+orbit_velocity_min = -0.05
+orbit_velocity_max = 0.05
+angle_min = -30.0
+angle_max = 30.0
+scale_amount_min = 0.2
+scale_amount_max = 0.2
+color_ramp = SubResource("Gradient_apopc")
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=47835288 groups=["player"]]
 

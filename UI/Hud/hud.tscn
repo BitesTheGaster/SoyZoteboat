@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bs5qrf2drwwte"]
 
 [ext_resource type="Script" uid="uid://dvf1hd184nien" path="res://UI/Hud/hud.gd" id="1_o72et"]
-[ext_resource type="Texture2D" uid="uid://du2ib34160300" path="res://placeholder.png" id="2_emf2s"]
+[ext_resource type="Texture2D" uid="uid://qdscorxso6gp" path="res://Textures/Player/Health.png" id="2_emf2s"]
 
 [node name="Hud" type="Control" unique_id=1193530559]
 layout_mode = 3

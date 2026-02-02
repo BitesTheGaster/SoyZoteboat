@@ -1,14 +1,16 @@
 [gd_scene format=3 uid="uid://1kr72jnyyvto"]
 
 [ext_resource type="Script" uid="uid://h51wga736a60" path="res://Enemies/Base/enemy.gd" id="1_gasfn"]
+[ext_resource type="Texture2D" uid="uid://nyf7rmnk6p23" path="res://Textures/Enemies/Base/Idle.png" id="2_gasgf"]
 [ext_resource type="Script" uid="uid://b3jo35qgn7xln" path="res://Controllers/EnemyController.gd" id="3_jhvkd"]
+[ext_resource type="Texture2D" uid="uid://00ynkk46jely" path="res://Textures/Enemies/Base/Rage.png" id="3_yj2fl"]
 [ext_resource type="Script" uid="uid://b3ds8eytb4r7k" path="res://StateMachines/Enemy/EnemyStateMachine.gd" id="4_oys17"]
 [ext_resource type="Script" uid="uid://cgt8b4murvuqd" path="res://StateMachines/Enemy/IdleEnemyState.gd" id="5_ay45o"]
 [ext_resource type="Script" uid="uid://dnvp048gthuw6" path="res://StateMachines/Enemy/ChaseEnemyState.gd" id="6_gasgf"]
-[ext_resource type="Texture2D" uid="uid://du2ib34160300" path="res://placeholder.png" id="7_gasgf"]
+[ext_resource type="Texture2D" uid="uid://bxhv6sdub3jev" path="res://Textures/Enemies/Base/RageParticle.png" id="8_yj2fl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gasfn"]
-size = Vector2(64, 64)
+size = Vector2(60, 60)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_ay45o"]
 a = Vector2(0, -74)
@@ -28,25 +30,13 @@ script = ExtResource("1_gasfn")
 [node name="Sprite" type="Node2D" parent="." unique_id=1341207145]
 
 [node name="Head" type="Sprite2D" parent="Sprite" unique_id=978980857]
-modulate = Color(1.3908166, 1.0694141, 9.1086497e-07, 1)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_gasgf")
+scale = Vector2(0.469, 0.469)
+texture = ExtResource("2_gasgf")
 
-[node name="Leg" type="Sprite2D" parent="Sprite" unique_id=397473006]
+[node name="Rage" type="Sprite2D" parent="Sprite" unique_id=397473006]
 visible = false
-modulate = Color(5.7063603, 2.3869262, 0, 1)
-position = Vector2(-10.999998, -10.000001)
-rotation = 2.1530936
-scale = Vector2(0.0701667, 0.13395095)
-texture = ExtResource("7_gasgf")
-
-[node name="Leg2" type="Sprite2D" parent="Sprite" unique_id=1760009574]
-visible = false
-modulate = Color(5.7063603, 2.3869262, 0, 1)
-position = Vector2(10, -9)
-rotation = -2.1537364
-scale = Vector2(0.0701667, 0.13395095)
-texture = ExtResource("7_gasgf")
+scale = Vector2(0.469, 0.469)
+texture = ExtResource("3_yj2fl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=355657050]
 shape = SubResource("RectangleShape2D_gasfn")
@@ -127,7 +117,7 @@ one_shot = true
 position = Vector2(0, -24)
 emitting = false
 amount = 1
-texture = ExtResource("7_gasgf")
+texture = ExtResource("8_yj2fl")
 lifetime = 0.2
 one_shot = true
 local_coords = true
